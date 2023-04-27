@@ -36,7 +36,7 @@ public class ArticleEntity {
           article.getTitle(),
           article.getDescription(),
           article.getText(),
-          article.getDateTime()
+          LocalDateTime.now()
         );
     }
 }

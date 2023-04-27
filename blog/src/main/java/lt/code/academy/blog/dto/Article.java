@@ -19,4 +19,11 @@ public class Article {
     private String text;
     private LocalDateTime dateTime;
 
+//    public Article(UUID id, String title, String description, String text) {
+//        this.id = id;
+//        this.title = title;
+//        this.description = description;
+//        this.text = text;
+//        dateTime = LocalDateTime.now();
+//    }
 }
