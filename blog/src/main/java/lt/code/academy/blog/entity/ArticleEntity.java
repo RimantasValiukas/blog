@@ -25,9 +25,9 @@ public class ArticleEntity {
     private String title;
     @Column(nullable = false)
     private String description;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 500)
     private String text;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 2000)
     private LocalDateTime dateTime;
 
     public static ArticleEntity convert(Article article) {
