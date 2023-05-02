@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="isArticleExist=${article.id ne null}">
 <head>
     <meta charset="UTF-8">
-    <title>Create article</title>
+    <title th:text="${isArticleExist ? 'Update article' : 'Upload article'}"></title>
 </head>
 <body>
-      <h3>Create product form</h3>
+      <h3 th:text="${isArticleExist ? 'Create article form' : 'Edit article form'}"></h3>
       <form method="post" th:object="${article}">
         <div>
           <label>Title</label>
@@ -19,7 +21,11 @@
           <label>Text</label>
             <textarea th:field="*{text}"></textarea>
         </div>
-          <button type="submit">Upload article</button>
+          <button
+                  th:text="${isArticleExist ? 'Update article' : 'Upload article'}"
+                  type="submit">
+
+          </button>
       </form>
       <div th:if="${message}" th:text="${message}"></div>
 

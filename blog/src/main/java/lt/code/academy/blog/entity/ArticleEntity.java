@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lt.code.academy.blog.dto.Article;
 
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,15 +20,15 @@ import java.util.UUID;
 public class ArticleEntity {
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "VARCHAR(36)", updatable = false)
+    @Column(columnDefinition = "uuid", updatable = false)
     private UUID id;
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
-    private String description;
     @Column(nullable = false, length = 500)
+    private String description;
+    @Column(nullable = false, length = 5000)
     private String text;
-    @Column(nullable = false, length = 2000)
+    @Column(nullable = false)
     private LocalDateTime dateTime;
 
     public static ArticleEntity convert(Article article) {

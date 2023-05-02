@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+    <div th:if="${#lists.isEmpty(articles)}" th:text="#{lt.code.academy.blog.articles.empty.message}"></div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>
+                    <span th:text="#{lt.code.academy.blog.articles.table.title}"></span>
+                </th>
+                <th>
+                    <span th:text="#{lt.code.academy.blog.articles.table.date}"></span>
+                </th>
+                <th>
+                    <span th:text="#{lt.code.academy.blog.articles.table.description}"></span>
+                </th>
+                <th>
+                    <span th:text="#{lt.code.academy.blog.articles.table.articleText}"></span>
+                </th>
+                <th>
+                    <span th:text="#{lt.code.academy.blog.articles.table.options}"></span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="article: ${articles}">
+                <td th:text="${article.title}"></td>
+                <td th:text="${article.dateTime}"></td>
+                <td th:text="${article.description}"></td>
+                <td th:text="${article.text}"></td>
+                <td>
+                    <a th:href="@{/articles/{id}(id=${article.id})}"
+                       th:text="#{lt.code.academy.blog.articles.table.options.edit}"></a>
+                    <a th:href="@{/articles/{id}/delete(id=${article.id})}"
+                    th:text="#{lt.code.academy.blog.article.table.options.delete}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
