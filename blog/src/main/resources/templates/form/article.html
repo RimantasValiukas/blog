@@ -2,32 +2,35 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       th:with="isArticleExist=${article.id ne null}">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${isArticleExist ? 'Update article' : 'Upload article'}"></title>
-</head>
+<head th:replace="~{fragment/fragment :: head(${isArticleExist} ? #{lt.code.academy.blog.article.button.update} : #{lt.code.academy.blog.article.button.create})}"></head>
 <body>
-      <h3 th:text="${isArticleExist ? 'Create article form' : 'Edit article form'}"></h3>
-      <form method="post" th:object="${article}">
-        <div>
-          <label>Title</label>
-          <input type="text" placeholder="Article title" th:field="*{title}">
-        </div>
-        <div>
-          <label>Description</label>
-            <textarea th:field="*{description}"></textarea>
-        </div>
-        <div>
-          <label>Text</label>
-            <textarea th:field="*{text}"></textarea>
-        </div>
-          <button
-                  th:text="${isArticleExist ? 'Update article' : 'Upload article'}"
-                  type="submit">
+    <div class="container" style="max-width: 1080px">
 
-          </button>
-      </form>
-      <div th:if="${message}" th:text="${message}"></div>
+        <header th:replace="~{fragment/fragment :: header}"></header>
+
+        <h3 th:text="${isArticleExist} ? #{lt.code.academy.blog.article.button.updateForm} : #{lt.code.academy.blog.article.button.createForm}"></h3>
+        <form method="post" th:object="${article}">
+
+            <div class="form-floating m-3">
+                <input type="text" class="form-control" id="floatingTitle" th:placeholder="#{lt.code.academy.blog.articles.table.title}" th:field="*{title}">
+                <label for="floatingTitle">Title</label>
+            </div>
+            <div class="form-floating m-3">
+                <textarea class="form-control" th:placeholder="#{lt.code.academy.blog.articles.table.writeDescription}" id="floatingTextarea2" style="height: 100px" th:field="*{description}"></textarea>
+                <label for="floatingTextarea2" th:text="#{lt.code.academy.blog.articles.table.description}"></label>
+            </div>
+            <div class="form-floating m-3">
+                <textarea class="form-control" th:placeholder="#{lt.code.academy.blog.articles.table.writeArticle}" id="floatingTextarea3" style="height: 200px" th:field="*{text}"></textarea>
+                <label for="floatingTextarea3" th:text="#{lt.code.academy.blog.articles.table.articleText}"></label>
+            </div>
+            <button class="btn btn-secondary btn-sm ms-3" th:text="${isArticleExist} ? #{lt.code.academy.blog.article.button.update} : #{lt.code.academy.blog.article.button.create}" type="submit"></button>
+        </form>
+        <div th:if="${message}" th:text="${message}"></div>
+
+        <footer th:replace="~{fragment/fragment :: footer}"></footer>
+    </div>
+
+
 
 </body>
 </html>
