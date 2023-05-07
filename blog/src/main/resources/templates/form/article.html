@@ -4,13 +4,13 @@
       th:with="isArticleExist=${article.id ne null}">
 <head th:replace="~{fragment/fragment :: head(${isArticleExist} ? #{lt.code.academy.blog.article.button.update} : #{lt.code.academy.blog.article.button.create})}"></head>
 <body>
-    <div class="container" style="max-width: 1080px">
+    <div class="container" style="max-width: 1080px;">
 
         <header th:replace="~{fragment/fragment :: header}"></header>
 
         <h3 th:text="${isArticleExist} ? #{lt.code.academy.blog.article.button.updateForm} : #{lt.code.academy.blog.article.button.createForm}"></h3>
-        <form method="post" th:object="${article}">
 
+        <form method="post" th:object="${article}">
             <div class="form-floating m-3">
                 <input type="text" class="form-control" id="floatingTitle" th:placeholder="#{lt.code.academy.blog.articles.table.title}" th:field="*{title}">
                 <label for="floatingTitle">Title</label>

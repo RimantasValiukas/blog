@@ -1,6 +1,5 @@
 package lt.code.academy.blog.controller;
 
-import jakarta.validation.Valid;
 import lt.code.academy.blog.dto.Article;
 import lt.code.academy.blog.dto.Comment;
 import lt.code.academy.blog.service.ArticleService;
@@ -117,11 +116,12 @@ public class ArticleController {
         model.addAttribute("article", articleService.getArticle(articleId));
         model.addAttribute("comment", commentService.getCommentById(commentId));
 
-        return "readArticle";
+        return "comment";
     }
 
     @PostMapping("/readArticle/{articleId}/{commentId}/update")
     public String updateComment(Comment comment, @PathVariable UUID articleId, @PathVariable UUID commentId) {
+        comment.setId(commentId);
         commentService.updateComment(comment);
 
         return "redirect:/articles/readArticle/" + articleId;

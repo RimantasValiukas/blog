@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/fragment :: head(#{lt.code.academy.blog.form.user.registration})}" >
+</head>
+<body>
+<div class="container" style="max-width: 1080px">
+
+  <header th:replace="~{fragment/fragment :: header}"></header>
+
+  <h3 class="blog-post-title" th:text="#{lt.code.academy.blog.form.user.registration}"></h3>
+
+  <div class="form-floating ms-3 mt-3">
+    <form method="post" th:object="${user}">
+
+      <div class="form-floating m-3">
+        <input type="text" class="form-control" id="floatingName" th:placeholder="#{lt.code.academy.blog.form.user.registration.name}" th:field="*{name}">
+        <label for="floatingName" th:text="#{lt.code.academy.blog.form.user.registration.name}"></label>
+      </div>
+
+      <div class="form-floating m-3">
+        <input type="text" class="form-control" id="floatingSurname" th:placeholder="#{lt.code.academy.blog.form.user.registration.surname}" th:field="*{surname}">
+        <label for="floatingSurname" th:text="#{lt.code.academy.blog.form.user.registration.surname}"></label>
+      </div>
+
+      <div class="form-floating m-3">
+        <input type="email" class="form-control" id="floatingEmail" th:placeholder="#{lt.code.academy.blog.form.user.registration.email}" th:field="*{email}">
+        <label for="floatingEmail" th:text="#{lt.code.academy.blog.form.user.registration.email}"></label>
+      </div>
+
+      <div class="form-floating m-3">
+        <input type="password" class="form-control" id="floatingPassword" th:placeholder="#{lt.code.academy.blog.form.user.registration.password}" th:field="*{password}">
+        <label for="floatingPassword" th:text="#{lt.code.academy.blog.form.user.registration.password}"></label>
+      </div>
+
+      <div class="form-floating m-3">
+        <input type="password" class="form-control" id="floatingRPassword" th:placeholder="#{lt.code.academy.blog.form.user.registration.repeatPassword}" th:field="*{repeatPassword}">
+        <label for="floatingRPassword" th:text="#{lt.code.academy.blog.form.user.registration.repeatPassword}"></label>
+      </div>
+
+      <button class="btn btn-secondary btn-sm m-1" type="submit" th:text="#{lt.code.academy.blog.form.user.registration.button}"></button>
+    </form>
+  </div>
+
+  <footer th:replace="~{fragment/fragment :: footer}"></footer>
+</div>
+
+</body>
+</html>

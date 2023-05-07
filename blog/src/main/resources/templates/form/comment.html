@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/fragment :: head(#{lt.code.academy.blog.comments.editComment})}" >
+</head>
+<body>
+<div class="container" style="max-width: 1080px">
+  <header th:replace="~{fragment/fragment :: header}"></header>
+
+  <h3 class="blog-post-title" th:text="#{lt.code.academy.blog.comments.editComment}"></h3>
+  <div class="form-floating ms-3 mt-3">
+    <form method="post" th:object="${comment}">
+      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px;max-width: 700px" th:field="*{comment}"></textarea>
+<!--      <input type="hidden" th:field="*{articleId}" th:value="${article.id}" />-->
+      <button class="btn btn-secondary btn-sm m-1" type="submit" th:text="#{lt.code.academy.blog.comments.button.update.save}"></button>
+    </form>
+  </div>
+
+  <footer th:replace="~{fragment/fragment :: footer}"></footer>
+</div>
+
+</body>
+</html>
