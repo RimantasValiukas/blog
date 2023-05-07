@@ -9,7 +9,7 @@
 
   <h3 class="blog-post-title" th:text="#{lt.code.academy.blog.form.user.registration}"></h3>
 
-  <div class="form-floating ms-3 mt-3">
+  <div class="form-floating ms-3 mt-3" style="max-width: 700px">
     <form method="post" th:object="${user}">
 
       <div class="form-floating m-3">
@@ -39,6 +39,7 @@
 
       <button class="btn btn-secondary btn-sm m-1" type="submit" th:text="#{lt.code.academy.blog.form.user.registration.button}"></button>
     </form>
+    <div class="alert alert-success mt-3" role="alert" th:if="${message}" th:text="${message}"></div>
   </div>
 
   <footer th:replace="~{fragment/fragment :: footer}"></footer>
