@@ -10,7 +10,7 @@
   <h3 class="blog-post-title" th:text="#{lt.code.academy.blog.form.user.registration}"></h3>
 
   <div class="form-floating ms-3 mt-3" style="max-width: 700px">
-    <form method="post" th:object="${user}">
+    <form method="post" th:object="${user}" th:action="@{/userRegistration}">
 
       <div class="form-floating m-3">
         <input type="text" class="form-control" id="floatingName" th:placeholder="#{lt.code.academy.blog.form.user.registration.name}" th:field="*{name}">

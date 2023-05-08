@@ -10,21 +10,9 @@
 
         <h3 th:text="${isArticleExist} ? #{lt.code.academy.blog.article.button.updateForm} : #{lt.code.academy.blog.article.button.createForm}"></h3>
 
-        <form method="post" th:object="${article}">
-            <div class="form-floating m-3">
-                <input type="text" class="form-control" id="floatingTitle" th:placeholder="#{lt.code.academy.blog.articles.table.title}" th:field="*{title}">
-                <label for="floatingTitle">Title</label>
-            </div>
-            <div class="form-floating m-3">
-                <textarea class="form-control" th:placeholder="#{lt.code.academy.blog.articles.table.writeDescription}" id="floatingTextarea2" style="height: 100px" th:field="*{description}"></textarea>
-                <label for="floatingTextarea2" th:text="#{lt.code.academy.blog.articles.table.description}"></label>
-            </div>
-            <div class="form-floating m-3">
-                <textarea class="form-control" th:placeholder="#{lt.code.academy.blog.articles.table.writeArticle}" id="floatingTextarea3" style="height: 200px" th:field="*{text}"></textarea>
-                <label for="floatingTextarea3" th:text="#{lt.code.academy.blog.articles.table.articleText}"></label>
-            </div>
-            <button class="btn btn-secondary btn-sm ms-3" th:text="${isArticleExist} ? #{lt.code.academy.blog.article.button.update} : #{lt.code.academy.blog.article.button.create}" type="submit"></button>
-        </form>
+        <div th:if="${isArticleExist}" th:include="~{fragment/fragment :: articleForm(@{/articles/{id}/update(id=${article.id})})}"></div>
+        <div th:unless="${isArticleExist}" th:include="~{fragment/fragment :: articleForm(@{/articles/create})}"></div>
+
         <div class="alert alert-success mt-3" th:if="${message}" th:text="${message}"></div>
 
         <footer th:replace="~{fragment/fragment :: footer}"></footer>

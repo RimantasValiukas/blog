@@ -1,5 +1,8 @@
 package lt.code.academy.blog.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +18,14 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Article {
     private UUID id;
+    @NotBlank
+    @Size(min = 5, max = 255)
     private String title;
+    @NotBlank
+    @Size(min = 5, max = 500)
     private String description;
+    @NotBlank
+    @Size(min = 5, max = 5000)
     private String text;
     private LocalDateTime dateTime;
 

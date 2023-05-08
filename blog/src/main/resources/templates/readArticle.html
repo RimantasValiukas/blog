@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-floating">
-            <form method="post" th:object="${comment}">
+            <form method="post" th:object="${comment}" th:action="@{/articles/readArticle/{articleId}(articleId=${article.id})}">
                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px;max-width: 700px" th:field="*{comment}"></textarea>
 <!--                <input type="hidden" th:field="*{articleId}" value="${article.id}" />-->
                 <button class="btn btn-secondary btn-sm m-1" type="submit" th:text="${isCommentExist} ? #{lt.code.academy.blog.comments.button.update.save} : #{lt.code.academy.blog.comments.button.addComment}"></button>

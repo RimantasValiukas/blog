@@ -49,6 +49,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/articles/about").setViewName("about");
+        registry.addViewController("/login").setViewName("form/login");
     }
 
 }

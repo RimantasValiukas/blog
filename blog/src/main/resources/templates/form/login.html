@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/fragment :: head(#{lt.code.academy.blog.form.user.login})}" >
+</head>
+<body>
+<div class="container" style="max-width: 1080px">
+
+  <header th:replace="~{fragment/fragment :: header}"></header>
+
+  <div class="form-floating w-50 mx-auto" style="max-width: 350px">
+    <h3 class="blog-post-title" th:text="#{lt.code.academy.blog.form.user.login}"></h3>
+    <div th:if="${param.error ne null}" class="alert alert-danger" role="alert" th:text="#{lt.code.academy.blog.form.user.login.message}"></div>
+    <form method="post" th:action="@{/login}">
+
+      <div class="form-floating m-3">
+        <input type="text" class="form-control" id="username" name="username" th:placeholder="#{lt.code.academy.blog.form.user.login.username}">
+        <label for="username" th:text="#{lt.code.academy.blog.form.user.login.username}"></label>
+      </div>
+
+      <div class="form-floating m-3">
+        <input type="password" class="form-control" id="password" name="password" th:placeholder="#{lt.code.academy.blog.form.user.registration.password}">
+        <label for="password" th:text="#{lt.code.academy.blog.form.user.registration.password}"></label>
+      </div>
+      <div class="d-flex justify-content-start">
+        <button class="btn btn-secondary btn-sm ms-3" type="submit" th:text="#{lt.code.academy.blog.form.user.login.button}"></button>
+      </div>
+
+    </form>
+  </div>
+
+  <footer th:replace="~{fragment/fragment :: footer}"></footer>
+</div>
+
+</body>
+</html>

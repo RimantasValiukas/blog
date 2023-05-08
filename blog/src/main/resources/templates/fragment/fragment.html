@@ -22,11 +22,32 @@
   </ul>
 
   <div class="col-md-3 text-end">
-    <button type="button" class="btn btn-outline-secondary me-2">Login</button>
+    <a th:href="@{/login}"><button type="button" class="btn btn-outline-secondary me-2">Login</button></a>
+
     <a th:href="@{/userRegistration}"><button type="button" class="btn btn-secondary">Sign-up</button></a>
   </div>
 </header>
 
+<div th:fragment="articleForm(action)">
+  <form method="post" th:object="${article}" th:action="${action}">
+    <div class="form-floating m-3">
+      <input type="text" class="form-control" id="floatingTitle" th:placeholder="#{lt.code.academy.blog.articles.table.title}" th:field="*{title}">
+      <label for="floatingTitle" th:text="#{lt.code.academy.blog.articles.table.title}"></label>
+      <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger mt-1" role="alert"></div>
+    </div>
+    <div class="form-floating m-3">
+      <textarea class="form-control" th:placeholder="#{lt.code.academy.blog.articles.table.writeDescription}" id="floatingTextarea2" style="height: 100px" th:field="*{description}"></textarea>
+      <label for="floatingTextarea2" th:text="#{lt.code.academy.blog.articles.table.description}"></label>
+      <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="alert alert-danger mt-1" role="alert"></div>
+    </div>
+    <div class="form-floating m-3">
+      <textarea class="form-control" th:placeholder="#{lt.code.academy.blog.articles.table.writeArticle}" id="floatingTextarea3" style="height: 200px" th:field="*{text}"></textarea>
+      <label for="floatingTextarea3" th:text="#{lt.code.academy.blog.articles.table.articleText}"></label>
+      <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="alert alert-danger mt-1" role="alert"></div>
+    </div>
+    <button class="btn btn-secondary btn-sm ms-3" th:text="${isArticleExist} ? #{lt.code.academy.blog.article.button.update} : #{lt.code.academy.blog.article.button.create}" type="submit"></button>
+  </form>
+</div>
 
 <footer th:fragment="footer" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
   <div class="col-md-4 d-flex align-items-center">

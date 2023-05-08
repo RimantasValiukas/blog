@@ -1,5 +1,6 @@
 package lt.code.academy.blog.controller;
 
+import jakarta.validation.Valid;
 import lt.code.academy.blog.dto.Article;
 import lt.code.academy.blog.dto.Comment;
 import lt.code.academy.blog.service.ArticleService;
@@ -7,6 +8,7 @@ import lt.code.academy.blog.service.CommentService;
 import lt.code.academy.blog.service.MessageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,9 +39,14 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public String uploadArticle(Article article) {
+    public String uploadArticle(@Valid Article article, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "form/article";
+        }
+
         String messageKey = "lt.code.academy.blog.article.create.succes.message";
         articleService.createArticle(article);
+
         return "redirect:/articles/create?messageKey=" + messageKey;
     }
 
@@ -49,13 +56,6 @@ public class ArticleController {
         return "articles";
     }
 
-//    @GetMapping("/{id}")
-//    public String getArticleDetails(@PathVariable UUID id, Model model) {
-//        model.addAttribute("article", articleService.getArticle(id));
-//
-//        return "articleDetails";
-//    }
-
     @GetMapping("/{id}/update")
     public String openArticleForm(@PathVariable UUID id, Model model) {
         model.addAttribute("article", articleService.getArticle(id));
@@ -64,10 +64,13 @@ public class ArticleController {
     }
 
     @PostMapping("/{id}/update")
-    public String updateArticle(Article article) {
+    public String updateArticle(@Valid Article article, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "form/article";
+        }
         articleService.updateArticle(article);
 
-        return "redirect:/articles";
+        return "redirect:/articles/readArticle/" + article.getId();
     }
 
     @GetMapping("/{id}/delete")
@@ -77,14 +80,6 @@ public class ArticleController {
 
         return "redirect:/articles";
     }
-
-//    @GetMapping("/readArticle/{articleId}")
-//    public String showAllArticleComments(Model model, @PathVariable UUID articleId) {
-//        model.addAttribute("comments", commentService.getCommentsByArticleId(articleId));
-//        model.addAttribute("comment", new Comment());
-//
-//        return "readArticle";
-//    }
 
     @GetMapping("/readArticle/{id}")
     public String readArticle(Model model, @PathVariable UUID id) {
@@ -96,7 +91,11 @@ public class ArticleController {
     }
 
     @PostMapping("/readArticle/{articleId}")
-    public String createComment(Comment comment, @PathVariable UUID articleId) {
+    public String createComment(@Valid Comment comment, @PathVariable UUID articleId, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "readArticle"; // cia kolkas gali but beda
+        }
+
         comment.setArticleId(articleId);
         commentService.createComment(comment);
 
@@ -116,11 +115,15 @@ public class ArticleController {
         model.addAttribute("article", articleService.getArticle(articleId));
         model.addAttribute("comment", commentService.getCommentById(commentId));
 
-        return "comment";
+        return "form/comment";
     }
 
     @PostMapping("/readArticle/{articleId}/{commentId}/update")
-    public String updateComment(Comment comment, @PathVariable UUID articleId, @PathVariable UUID commentId) {
+    public String updateComment(@Valid Comment comment, @PathVariable UUID articleId, @PathVariable UUID commentId, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "form/comment"; //todo kolkas beda
+        }
+
         comment.setId(commentId);
         commentService.updateComment(comment);
 
