@@ -10,8 +10,10 @@
 
         <h3 th:text="${isArticleExist} ? #{lt.code.academy.blog.article.button.updateForm} : #{lt.code.academy.blog.article.button.createForm}"></h3>
 
-        <div th:if="${isArticleExist}" th:include="~{fragment/fragment :: articleForm(@{/articles/{id}/update(id=${article.id})})}"></div>
-        <div th:unless="${isArticleExist}" th:include="~{fragment/fragment :: articleForm(@{/articles/create})}"></div>
+        <div th:if="${isArticleExist}"
+             th:include="~{fragment/fragment :: articleForm(@{/articles/{id}/update(id=${article.id})})}"></div>
+        <div th:unless="${isArticleExist}"
+             th:include="~{fragment/fragment :: articleForm(@{/articles/create})}"></div>
 
         <div class="alert alert-success mt-3" th:if="${message}" th:text="${message}"></div>
 

@@ -24,7 +24,7 @@
             <div class="ps-3" th:if="${#lists.isEmpty(comments)}" th:text="#{lt.code.academy.blog.comments.empty.message}"></div>
             <div class="border rounded-3 mt-2 mb-2" th:each="comment: ${comments}">
                 <p class="blog-post-meta ps-3 pt-3" th:text="${#temporals.format(article.dateTime, 'dd/MM/yyyy HH:mm') + ' Commented by User'}"><</p>
-                <p class="ps-3" th:text="${comment.comment}"></p>
+                <p class="ps-3" th:text="${comment.commentText}"></p>
                 <div class="ps-3 pb-3">
                     <a th:href="@{/articles/readArticle/{articleId}/{commentId}/update(articleId=${article.id}, commentId=${comment.id})}"><button class="btn btn-secondary btn-sm" th:text="#{lt.code.academy.blog.comments.button.editComment}"></button></a>
                     <a th:href="@{/articles/readArticle/{articleId}/{commentId}/delete(articleId=${article.id}, commentId=${comment.id})}"><button class="btn btn-secondary btn-sm" th:text="#{lt.code.academy.blog.comments.button.delete}"></button></a>
@@ -34,8 +34,7 @@
 
         <div class="form-floating">
             <form method="post" th:object="${comment}" th:action="@{/articles/readArticle/{articleId}(articleId=${article.id})}">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px;max-width: 700px" th:field="*{comment}"></textarea>
-<!--                <input type="hidden" th:field="*{articleId}" value="${article.id}" />-->
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px;max-width: 700px" th:field="*{commentText}"></textarea>
                 <button class="btn btn-secondary btn-sm m-1" type="submit" th:text="${isCommentExist} ? #{lt.code.academy.blog.comments.button.update.save} : #{lt.code.academy.blog.comments.button.addComment}"></button>
             </form>
         </div>

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lt.code.academy.blog.dto.Comment;
-import lt.code.academy.blog.dto.User;
 
 
 import java.time.LocalDateTime;
@@ -26,7 +25,7 @@ public class CommentEntity {
     @Column(nullable = false, updatable = false)
     private UUID articleId;
     @Column(nullable = false, length = 1000)
-    private String comment;
+    private String commentText;
     @Column(nullable = false)
     private LocalDateTime dateTime;
     @Column(updatable = false)
@@ -36,7 +35,7 @@ public class CommentEntity {
         return new CommentEntity(
                 comment.getId(),
                 comment.getArticleId(),
-                comment.getComment(),
+                comment.getCommentText(),
                 LocalDateTime.now(),
                 comment.getUserId()
         );

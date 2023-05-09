@@ -6,13 +6,11 @@ import lt.code.academy.blog.dto.Comment;
 import lt.code.academy.blog.service.ArticleService;
 import lt.code.academy.blog.service.CommentService;
 import lt.code.academy.blog.service.MessageService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -82,18 +80,17 @@ public class ArticleController {
     }
 
     @GetMapping("/readArticle/{id}")
-    public String readArticle(Model model, @PathVariable UUID id) {
+    public String readArticle(Model model, @PathVariable UUID id, Authentication authentication) {
         model.addAttribute("article", articleService.getArticle(id));
         model.addAttribute("comments", commentService.getCommentsByArticleId(id));
         model.addAttribute("comment", new Comment());
-
         return "readArticle";
     }
 
     @PostMapping("/readArticle/{articleId}")
     public String createComment(@Valid Comment comment, @PathVariable UUID articleId, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "readArticle"; // cia kolkas gali but beda
+            return "readArticle";
         }
 
         comment.setArticleId(articleId);
@@ -107,7 +104,7 @@ public class ArticleController {
         commentService.deleteComment(commentId);
         model.addAttribute("comments", commentService.getCommentsByArticleId(articleId));
 
-        return "redirect:/articles/readArticle/" +articleId;
+        return "redirect:/articles/readArticle/" + articleId;
     }
 
     @GetMapping("/readArticle/{articleId}/{commentId}/update")
@@ -121,7 +118,7 @@ public class ArticleController {
     @PostMapping("/readArticle/{articleId}/{commentId}/update")
     public String updateComment(@Valid Comment comment, @PathVariable UUID articleId, @PathVariable UUID commentId, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "form/comment"; //todo kolkas beda
+            return "form/comment";
         }
 
         comment.setId(commentId);

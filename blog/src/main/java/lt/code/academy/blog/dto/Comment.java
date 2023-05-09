@@ -1,6 +1,5 @@
 package lt.code.academy.blog.dto;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,8 +19,8 @@ public class Comment {
     private UUID id;
     private UUID articleId;
     @NotBlank
-    @Size(min = 2, max = 1000)  //kolkas beda
-    private String comment;
+    @Size(min = 2, max = 1000)
+    private String commentText;
     private LocalDateTime dateTime;
     private UUID userId;
 
@@ -29,7 +28,7 @@ public class Comment {
         return new Comment(
                 entity.getId(),
                 entity.getArticleId(),
-                entity.getComment(),
+                entity.getCommentText(),
                 entity.getDateTime(),
                 null
         );
