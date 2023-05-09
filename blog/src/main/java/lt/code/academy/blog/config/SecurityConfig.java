@@ -3,6 +3,7 @@ package lt.code.academy.blog.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -12,12 +13,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests()
+                .requestMatchers("/userRegistration", "/articles/about")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/articles/about")
+                .failureUrl("/login?error")
                 .permitAll()
                 .and()
                 .logout()
@@ -26,5 +30,6 @@ public class SecurityConfig {
 
         return httpSecurity.build();
     }
+
 
 }
