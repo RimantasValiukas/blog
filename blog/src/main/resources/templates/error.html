@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/fragment :: head('Error page')}" >
+</head>
+<body>
+<div class="container" style="max-width: 1080px">
+  <header th:replace="~{fragment/fragment :: header}"></header>
+
+  <div th:text="#{lt.code.academy.blog.error}"></div>
+
+  <footer th:replace="~{fragment/fragment :: footer}"></footer>
+</div>
+
+</body>
+</html>
