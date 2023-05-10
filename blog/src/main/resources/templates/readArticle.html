@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
         th:with="isCommentExist=${comment.id ne null}">
-<head th:replace="~{fragment/fragment :: head('Read my post')}"></head>
+<head th:replace="~{fragment/fragment :: head(${article.title})}"></head>
 <body>
     <div class="container" style="max-width: 1080px">
 
@@ -11,7 +12,7 @@
             <h2 class="blog-post-title ps-3" th:text="${article.title}"></h2>
             <p class="blog-post-meta ps-3" th:text="${#temporals.format(article.dateTime, 'dd/MM/yyyy HH:mm') + ' Author'}"></p>
             <p class="ps-3" th:text="${article.text}"></p>
-            <div class="ps-3 pb-3">
+            <div sec:authorize="hasRole('ADMIN')" class="ps-3 pb-3">
                 <a th:href="@{/articles/{id}/update(id=${article.id})}">
                     <button class="btn btn-secondary btn-sm" th:text="#{lt.code.academy.blog.articles.table.options.edit}"></button></a>
                 <a th:href="@{/articles/{id}/delete(id=${article.id})}">
@@ -23,16 +24,16 @@
         <div class="blog-post mb-1" style="max-width: 700px">
             <div class="ps-3" th:if="${#lists.isEmpty(comments)}" th:text="#{lt.code.academy.blog.comments.empty.message}"></div>
             <div class="border rounded-3 mt-2 mb-2" th:each="comment: ${comments}">
-                <p class="blog-post-meta ps-3 pt-3" th:text="${#temporals.format(article.dateTime, 'dd/MM/yyyy HH:mm') + ' Commented by User'}"><</p>
+                <p class="blog-post-meta ps-3 pt-3" th:text="${#temporals.format(article.dateTime, 'dd/MM/yyyy HH:mm') + ' Commented by uses'}"></p>
                 <p class="ps-3" th:text="${comment.commentText}"></p>
-                <div class="ps-3 pb-3">
+                <div sec:authorize="hasRole('USER')" class="ps-3 pb-3">
                     <a th:href="@{/articles/readArticle/{articleId}/{commentId}/update(articleId=${article.id}, commentId=${comment.id})}"><button class="btn btn-secondary btn-sm" th:text="#{lt.code.academy.blog.comments.button.editComment}"></button></a>
                     <a th:href="@{/articles/readArticle/{articleId}/{commentId}/delete(articleId=${article.id}, commentId=${comment.id})}"><button class="btn btn-secondary btn-sm" th:text="#{lt.code.academy.blog.comments.button.delete}"></button></a>
                 </div>
             </div>
         </div>
 
-        <div class="form-floating">
+        <div sec:authorize="hasRole('USER')" class="form-floating">
             <form method="post" th:object="${comment}" th:action="@{/articles/readArticle/{articleId}(articleId=${article.id})}">
                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px;max-width: 700px" th:field="*{commentText}"></textarea>
                 <button class="btn btn-secondary btn-sm m-1" type="submit" th:text="${isCommentExist} ? #{lt.code.academy.blog.comments.button.update.save} : #{lt.code.academy.blog.comments.button.addComment}"></button>
@@ -41,8 +42,5 @@
 
         <footer th:replace="~{fragment/fragment :: footer}"></footer>
     </div>
-
-
-
 </body>
 </html>

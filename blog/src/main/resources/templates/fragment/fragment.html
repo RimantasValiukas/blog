@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,15 +25,28 @@
   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
     <li><a th:href="@{/articles/about}" class="nav-link px-2 link-secondary" th:text="#{lt.code.academy.blog.navigation.home}"></a></li>
     <li><a th:href="@{/articles}" class="nav-link px-2 link-dark" th:text="#{lt.code.academy.blog.navigation.readPosts}"></a></li>
-    <li><a th:href="@{/articles/create}" class="nav-link px-2 link-dark" th:text="#{lt.code.academy.blog.navigation.create}"></a></li>
+    <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/articles/create}" class="nav-link px-2 link-dark" th:text="#{lt.code.academy.blog.navigation.create}"></a></li>
     <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
     <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
   </ul>
 
   <div class="col-md-3 text-end">
-    <a th:href="@{/login}"><button type="button" class="btn btn-outline-secondary me-2">Login</button></a>
+    <div sec:authorize="isAnonymous()">
+      <a th:href="@{/login}"><button type="button" class="btn btn-outline-secondary me-2">Login</button></a>
+      <a th:href="@{/userRegistration}"><button type="button" class="btn btn-secondary">Sign-up</button></a>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+      <a class="text-decoration-none text-muted" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle fs-4"></i></a>
+      <ul class="dropdown-menu">
+        <li>
+          <div sec:authentication="principal.fullName" style="padding: 4px 16px 4px 16px; white-space: nowrap;"></div>
+        </li>
+        <li>
+          <a class="dropdown- item ms-3 text-decoration-none text-muted" th:href="@{/logout}" th:text="#{lt.code.academy.blog.header.logout}"></a>
+        </li>
+      </ul>
+    </div>
 
-    <a th:href="@{/userRegistration}"><button type="button" class="btn btn-secondary">Sign-up</button></a>
   </div>
 </header>
 

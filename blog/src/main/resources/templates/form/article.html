@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:with="isArticleExist=${article.id ne null}">
 <head th:replace="~{fragment/fragment :: head(${isArticleExist} ? #{lt.code.academy.blog.article.button.update} : #{lt.code.academy.blog.article.button.create})}"></head>
 <body>
