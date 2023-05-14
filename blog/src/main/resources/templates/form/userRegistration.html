@@ -34,12 +34,14 @@
         <input type="password" class="form-control" id="floatingPassword" th:placeholder="#{lt.code.academy.blog.form.user.registration.password}" th:field="*{password}">
         <label for="floatingPassword" th:text="#{lt.code.academy.blog.form.user.registration.password}"></label>
         <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger mt-1" role="alert"></div>
+        <div th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="alert alert-danger mt-1" role="alert"></div>
       </div>
 
       <div class="form-floating m-3">
         <input type="password" class="form-control" id="floatingRPassword" th:placeholder="#{lt.code.academy.blog.form.user.registration.repeatPassword}" th:field="*{repeatPassword}">
         <label for="floatingRPassword" th:text="#{lt.code.academy.blog.form.user.registration.repeatPassword}"></label>
         <div th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" class="alert alert-danger mt-1" role="alert"></div>
+        <div th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="alert alert-danger mt-1" role="alert"></div>
       </div>
 
       <button class="btn btn-secondary btn-sm m-1" type="submit" th:text="#{lt.code.academy.blog.form.user.registration.button}"></button>
