@@ -15,7 +15,7 @@
                 <div class="container-fluid py-2">
                     <h1 class="display-6 fw-bold" th:text="${article.title}"></h1>
                     <p class="blog-post-meta fs-7" th:text="${#temporals.format(article.dateTime, 'dd/MM/yyyy HH:mm')}"></p>
-                    <p class="col-md-8 fs-5" th:text="${article.description}" style="word-wrap: break-word"></p>
+                    <p class="col-md-12 fs-5" th:text="${article.description}" style="word-wrap: break-word; text-align: justify;"></p>
                     <a th:href="@{articles/readArticle/{id}(id=${article.id})}">
                         <button class="btn btn-secondary btn-sm" type="button" th:text="#{lt.code.academy.blog.article.button.readArticle}"></button>
                     </a>
