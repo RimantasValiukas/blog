@@ -43,10 +43,6 @@ public class CommentService {
                 .orElseThrow(() -> new CommentNotExistRuntimeException(id));
     }
 
-    public void updateComment(Comment comment) {
-        commentRepository.save(CommentEntity.convert(comment));
-    }
-
     public void deleteComment(UUID id) {
         commentRepository.deleteById(id);
     }

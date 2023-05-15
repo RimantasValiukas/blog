@@ -2,6 +2,7 @@ package lt.code.academy.blog.validator.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+import lt.code.academy.blog.validator.PasswordValidator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

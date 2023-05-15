@@ -14,14 +14,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests()
-                .requestMatchers("/userRegistration", "/articles", "/articles/about", "/articles/readArticle/**", "/", "/css/**", "/js/**", "/error")
+                .requestMatchers("/userRegistration", "/articles", "/articles/about", "/articles/readArticle/**", "/", "/error")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/articles/about")
+                .defaultSuccessUrl("/articles/about", true)
                 .failureUrl("/login?error")
                 .permitAll()
                 .and()

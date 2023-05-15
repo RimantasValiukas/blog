@@ -11,15 +11,13 @@ import lt.code.academy.blog.entity.CommentEntity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Setter
-@Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Comment {
     private UUID id;
     private UUID articleId;
-    @NotBlank
-    @Size(min = 2, max = 1000)
     private String commentText;
     private LocalDateTime dateTime;
     private UUID userId;

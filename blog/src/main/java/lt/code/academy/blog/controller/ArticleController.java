@@ -105,7 +105,7 @@ public class ArticleController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/readArticle/{articleId}")
-    public String createComment(@Valid Comment comment, @PathVariable UUID articleId, @RequestParam("userId") UUID userId, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails) {
+    public String createComment(@Valid Comment comment, @PathVariable UUID articleId, @RequestParam(value = "userId", required = false) UUID userId, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "readArticle";
         }

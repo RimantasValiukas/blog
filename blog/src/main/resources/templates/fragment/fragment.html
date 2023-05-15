@@ -17,7 +17,7 @@
     <select id="language-switcher"
             class="form-select form-select-sm"
             aria-label=".form-select-sm example">
-      <option selected>Language:</option>
+      <option selected th:text="#{lt.code.academy.blog.form.header.language}"></option>
       <option value="EN">EN</option>
       <option value="LT">LT</option>
     </select>
@@ -30,8 +30,8 @@
 
   <div class="col-md-3 text-end">
     <div sec:authorize="isAnonymous()">
-      <a th:href="@{/login}"><button type="button" class="btn btn-outline-secondary me-2">Login</button></a>
-      <a th:href="@{/userRegistration}"><button type="button" class="btn btn-secondary">Sign-up</button></a>
+      <a th:href="@{/login}"><button type="button" class="btn btn-outline-secondary me-2" th:text="#{lt.code.academy.blog.form.user.login.button}"></button></a>
+      <a th:href="@{/userRegistration}"><button type="button" class="btn btn-secondary" th:text="#{lt.code.academy.blog.form.user.registration.button}"></button></a>
     </div>
     <div sec:authorize="isAuthenticated()">
       <a class="text-decoration-none text-muted" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle fs-4"></i></a>
