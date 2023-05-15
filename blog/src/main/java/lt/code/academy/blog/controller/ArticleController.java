@@ -7,6 +7,9 @@ import lt.code.academy.blog.service.ArticleService;
 import lt.code.academy.blog.service.CommentService;
 import lt.code.academy.blog.service.MessageService;
 import lt.code.academy.blog.service.UserService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,8 +59,9 @@ public class ArticleController {
     }
 
     @GetMapping
-    public String showAllArticles(Model model) {
-        model.addAttribute("articles", articleService.getAllArticles());
+    public String showAllArticles(Model model, @PageableDefault(sort = {"dateTime"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        model.addAttribute("articles", articleService.getArticlesByPage(pageable));
+
         return "articles";
     }
 

@@ -4,6 +4,8 @@ import lt.code.academy.blog.dto.Article;
 import lt.code.academy.blog.entity.ArticleEntity;
 import lt.code.academy.blog.exception.ArticleNotExistRuntimeException;
 import lt.code.academy.blog.repository.ArticleRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +28,10 @@ public class ArticleService {
                 .stream()
                 .map(Article::convert)
                 .toList();
+    }
+
+    public Page<Article> getArticlesByPage(Pageable pageable) {
+        return articleRepository.findAll(pageable).map(Article::convert);
     }
 
     public Article getArticle(UUID id) {
