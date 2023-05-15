@@ -1,8 +1,11 @@
 package lt.code.academy.blog.service;
 
 import lt.code.academy.blog.dto.Comment;
+import lt.code.academy.blog.entity.ArticleEntity;
 import lt.code.academy.blog.entity.CommentEntity;
+import lt.code.academy.blog.exception.ArticleNotExistRuntimeException;
 import lt.code.academy.blog.exception.CommentNotExistRuntimeException;
+import lt.code.academy.blog.repository.ArticleRepository;
 import lt.code.academy.blog.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +16,18 @@ import java.util.UUID;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final ArticleRepository articleRepository;
 
-    public CommentService(CommentRepository commentRepository) {
+    public CommentService(CommentRepository commentRepository, ArticleRepository articleRepository) {
         this.commentRepository = commentRepository;
+        this.articleRepository = articleRepository;
     }
 
-    public void createComment(Comment comment) {
-        commentRepository.save(CommentEntity.convert(comment));
+    public void saveComment(Comment comment) {
+        CommentEntity commentEntity = CommentEntity.convert(comment);
+        ArticleEntity articleEntity = articleRepository.findById(comment.getArticleId()).orElseThrow(() -> new ArticleNotExistRuntimeException(comment.getArticleId()));
+        commentEntity.setArticleEntity(articleEntity);
+        commentRepository.save(commentEntity);
     }
 
     public List<Comment> getCommentsByArticleId(UUID articleId) {

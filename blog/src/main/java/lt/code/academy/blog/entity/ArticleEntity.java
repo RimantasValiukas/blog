@@ -9,6 +9,8 @@ import lt.code.academy.blog.dto.Article;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Setter
@@ -30,6 +32,8 @@ public class ArticleEntity {
     private String text;
     @Column(nullable = false)
     private LocalDateTime dateTime;
+    @OneToMany(mappedBy = "articleEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommentEntity> comments;
 
     public static ArticleEntity convert(Article article) {
         return new ArticleEntity(
@@ -37,7 +41,8 @@ public class ArticleEntity {
           article.getTitle(),
           article.getDescription(),
           article.getText(),
-          LocalDateTime.now()
+          LocalDateTime.now(),
+                new ArrayList<>()
         );
     }
 }

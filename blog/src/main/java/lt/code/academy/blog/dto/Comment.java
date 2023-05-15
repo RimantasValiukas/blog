@@ -30,7 +30,7 @@ public class Comment {
                 entity.getArticleId(),
                 entity.getCommentText(),
                 entity.getDateTime(),
-                null
+                entity.getUserId()
         );
     }
 }

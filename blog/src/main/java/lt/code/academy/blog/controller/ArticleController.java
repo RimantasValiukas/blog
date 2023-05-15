@@ -3,12 +3,10 @@ package lt.code.academy.blog.controller;
 import jakarta.validation.Valid;
 import lt.code.academy.blog.dto.Article;
 import lt.code.academy.blog.dto.Comment;
-import lt.code.academy.blog.dto.User;
 import lt.code.academy.blog.service.ArticleService;
 import lt.code.academy.blog.service.CommentService;
 import lt.code.academy.blog.service.MessageService;
 import lt.code.academy.blog.service.UserService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -110,7 +107,7 @@ public class ArticleController {
         }
         comment.setUserId(userId);
         comment.setArticleId(articleId);
-        commentService.createComment(comment);
+        commentService.saveComment(comment);
 
         return "redirect:" + articleId;
     }
@@ -141,7 +138,7 @@ public class ArticleController {
         }
 
         comment.setId(commentId);
-        commentService.updateComment(comment);
+        commentService.saveComment(comment);
 
         return "redirect:/articles/readArticle/" + articleId;
     }

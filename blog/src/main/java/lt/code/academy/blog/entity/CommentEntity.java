@@ -22,7 +22,7 @@ public class CommentEntity {
     @GeneratedValue
     @Column(updatable = false)
     private UUID id;
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, insertable = false)
     private UUID articleId;
     @Column(nullable = false, length = 1000)
     private String commentText;
@@ -30,6 +30,10 @@ public class CommentEntity {
     private LocalDateTime dateTime;
     @Column(updatable = false)
     private UUID userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "articleId")
+    private ArticleEntity articleEntity;
+
 
     public static CommentEntity convert(Comment comment) {
         return new CommentEntity(
@@ -37,7 +41,8 @@ public class CommentEntity {
                 comment.getArticleId(),
                 comment.getCommentText(),
                 LocalDateTime.now(),
-                comment.getUserId()
+                comment.getUserId(),
+                null
         );
     }
 }

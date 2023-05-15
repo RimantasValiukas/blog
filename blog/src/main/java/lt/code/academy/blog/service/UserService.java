@@ -40,7 +40,6 @@ public class UserService implements UserDetailsService {
 
         return usersMap;
     }
-
     public User getUserById(UUID id) {
         return userRepository.findById(id)
                 .map(User::convert)
